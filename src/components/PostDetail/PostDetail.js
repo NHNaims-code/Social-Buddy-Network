@@ -82,7 +82,7 @@ const PostDetail = () => {
   //for Card
 
   return (
-    <Box display = 'flex' justifyContent = 'center'>
+    <Box display = 'flex' justifyContent = 'center' bgcolor="#F0F2F5" >
         <Card className={classes.root}>
     <CardHeader
       avatar={

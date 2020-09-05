@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import { Box, CardHeader, Avatar } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 
 import imgContext, { ImgUrlContext } from '../../App'
@@ -26,7 +26,6 @@ const Post = ({post}) => {
 
     const classes = useStyles();
     const history = useHistory()
-    // const [img, setImgUrl] = useContext(imgContext);
     const [url, setUrl] = useContext(ImgUrlContext);
     const handleReadMore = () => {
         history.push(`/post/${id}`);
@@ -37,10 +36,20 @@ const Post = ({post}) => {
         <Box display = "flex" justifyContent = "center" mb = {3} bgColor = "primary.main">
             <Card className={classes.root}>
                 <CardActionArea>
+                <CardHeader
+            avatar={
+                <Avatar aria-label="recipe" className={classes.avatar} bgcolor = "red">
+                {(title.slice(0, 1)).toUpperCase()}
+                </Avatar>
+            }
+            
+            title={title}
+            subheader="September 14, 2016"
+    />
                     <CardMedia
                     component="img"
                     alt="Contemplative Reptile"
-                    height="140"
+                    height="528"
                     image={imgUrl}
                     title={title}
                     />

@@ -15,19 +15,8 @@ const Home = () => {
         .then(data => setPosts(data))
     }
     useEffect(serverData , [])
-
-   
-    // const [img, setImg] = useState([]);
-    // const serverImg = () => {
-    //     fetch('https://picsum.photos/200')
-    //     .then(res => res)
-    //     .then(data => setImg(data))
-    // }
-    // useEffect(serverImg,[30])
-    // console.log(img.url);
-    // console.log(posts);
     return (
-        <Box bgcolor="secondary.main" color="secondary.contrastText" p={2}>
+        <Box bgcolor="#F0F2F5" color="secondary.contrastText" p={2}>
 
             gfgdgg
             {
