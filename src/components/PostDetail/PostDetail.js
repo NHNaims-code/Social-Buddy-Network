@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -14,18 +13,20 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ImgUrlContext } from '../../App';
 import { Box, Button } from '@material-ui/core';
 import Comment from '../Comment/Comment';
+import { useHistory } from 'react-router-dom';
 
 
 
-// for card
+// ==================================================
+// CARD START
+// ==================================================
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 500,
+        width: 500,
     },
     media: {
         height: 0,
@@ -45,16 +46,29 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
     },
 }));
-// for card
+// ==================================================
+// CARD END
+// ==================================================
 
 
-// for detail info from server
+
+
 const PostDetail = () => {
   const [postDetail, setPostDetail] = useState([]);
   const [comments, setComments] = useState([]);
-  const [url] = useContext(ImgUrlContext);
+  const [url, setUrl, postTime, setPostTime] = useContext(ImgUrlContext);
+  const [day, month, year, minutes, firstLetter] = postTime;
   const {postId} = useParams();
   
+  const history = useHistory();
+
+  if(day === undefined){
+      history.push('/');
+  }
+
+// ==================================================
+// Detail info from server Start
+// ==================================================
   const postDetailFromServer = () => {
       fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
       .then(res => res.json())
@@ -71,7 +85,11 @@ const PostDetail = () => {
 
   console.log(comments);
   const {title, body} = postDetail;
-// for detail info from server
+// ==================================================
+// Detail info from server End
+// ==================================================
+
+
 
   //for Card
   const classes = useStyles();
@@ -80,14 +98,13 @@ const PostDetail = () => {
       setExpanded(!expanded);
   };
   //for Card
-
   return (
-    <Box display = 'flex' justifyContent = 'center' bgcolor="#F0F2F5" >
+    <Box display = 'flex' justifyContent = 'center' bgcolor="#F0F2F5">
         <Card className={classes.root}>
     <CardHeader
       avatar={
         <Avatar aria-label="recipe" className={classes.avatar}>
-          R
+          {firstLetter}
         </Avatar>
       }
       action={
@@ -96,7 +113,7 @@ const PostDetail = () => {
         </IconButton>
       }
       title={title}
-      subheader="September 14, 2016"
+      subheader={`${month} ${day}, ${year}    -   ${minutes} minutes ago`}
     />
     <CardMedia
       className={classes.media}
@@ -120,29 +137,12 @@ const PostDetail = () => {
       <IconButton aria-label="share">
         <ShareIcon />
       </IconButton>
-      {/* <IconButton
-        aria-label="share"
-        className={clsx(classes.expand, {
-          [classes.expandOpen]: expanded,
-        })}
-        onClick={handleExpandClick}
-        aria-expanded={expanded}
-        aria-label="show more"
-      >
-        <ExpandMoreIcon />
-      </IconButton> */}
     </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
         {
           comments.map(comment => <Comment comment = {comment}></Comment>)
         }
-        {/* <Typography paragraph>Method:</Typography>
-        <Typography paragraph>
-          Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-          minutes.
-        </Typography> */}
-        
       </CardContent>
     </Collapse>
   </Card>

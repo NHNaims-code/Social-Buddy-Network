@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,71 +7,169 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Box, CardHeader, Avatar } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Box, CardHeader, Avatar, Badge, withStyles } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { useHistory } from 'react-router-dom';
+import { ImgUrlContext } from '../../App'
 
-import imgContext, { ImgUrlContext } from '../../App'
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
     root: {
-      maxWidth: 500,
+        width: 500,
     },
-  });
+    card: {
+        maxWidth: 345,
+        margin: theme.spacing(2),
+    },
+    media: {
+        height: 190,
+    },
+}));
+
+
+
+
+// ==================================================
+// Style Badge Start Here
+// ==================================================
+const StyledBadge = withStyles((theme) => ({
+    badge: {
+      backgroundColor: '#44b700',
+      color: '#44b700',
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      '&::after': {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        borderRadius: '50%',
+        animation: '$ripple 1.2s infinite ease-in-out',
+        border: '1px solid currentColor',
+        content: '""',
+      },
+    },
+    '@keyframes ripple': {
+      '0%': {
+        transform: 'scale(.8)',
+        opacity: 1,
+      },
+      '100%': {
+        transform: 'scale(2.4)',
+        opacity: 0,
+      },
+    },
+  }))(Badge);
+
+// ==================================================
+// Style Badge End Here
+// ==================================================
+
+
+
+
 
 const Post = ({post}) => {
-    const random = Math.round((Math.random() * 80) + 12);
-    const randomNumber = parseInt(random);
     const {id, title, body} = post;
-    const imgUrl = `https://picsum.photos/500/8${randomNumber}`;
-
-    const classes = useStyles();
+    const [url, setUrl, postTime, setPostTime] = useContext(ImgUrlContext);
+    
     const history = useHistory()
-    const [url, setUrl] = useContext(ImgUrlContext);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(()=>{
+        setTimeout(() => {
+            setLoading(false)
+        },4000)
+    },[])
+
+    const firstLetter = (title.slice(0, 1)).toUpperCase();
+    const classes = useStyles();
+    // RANDOM INFO MAKING START 
+    const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+    const d = new Date();
+    const currentDay = d.getDate();
+    const currentMonth = monthNames[d.getMonth()]
+    const currentYear = d.getFullYear();
+    const randomMinute = Math.floor((Math.random() * 59) + 1)
+    const random = Math.round((Math.random() * 65) + 31);
+    const randomNumber = parseInt(random);
+    // RANDOM INFO MAKING END HERE
+
+    const imgUrl = `https://picsum.photos/500/5${randomNumber}`;
     const handleReadMore = () => {
         history.push(`/post/${id}`);
         setUrl(imgUrl);
+        setPostTime([currentDay, currentMonth, currentYear, randomMinute, firstLetter]);
     }
-    console.log(url);
+
     return (
-        <Box display = "flex" justifyContent = "center" mb = {3} bgColor = "primary.main">
+        <Box display = "flex" justifyContent = "center" mb = {3} bgColor = "primary.main" onClick={handleReadMore}>
             <Card className={classes.root}>
                 <CardActionArea>
                 <CardHeader
             avatar={
-                <Avatar aria-label="recipe" className={classes.avatar} bgcolor = "red">
-                {(title.slice(0, 1)).toUpperCase()}
-                </Avatar>
+                <StyledBadge
+                    overlap="circle"
+                    anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                    }}
+                    variant="dot"
+                >
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                    {firstLetter}
+                    </Avatar>
+                </StyledBadge>
+                
             }
-            
-            title={title}
-            subheader="September 14, 2016"
-    />
-                    <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="528"
-                    image={imgUrl}
-                    title={title}
-                    />
+           
+            title={
+                loading ? (<Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} />):title
+            }
+            subheader={loading ? <Skeleton animation="wave" height={10} width="40%" /> : `${currentMonth} ${currentDay}, ${currentYear}    -   ${randomMinute} minutes ago    `}
+            />
+                {loading ? (
+                        <Skeleton animation="wave" variant="rect" className={classes.media} height ={500}/>
+                    ) : (
+                        <CardMedia 
+                        component="img"
+                        alt={title}
+                        height="528"
+                        image={imgUrl}
+                        title={title}
+                        />
+                    )}
+              
+                   
+                    
                     <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {body}
-                    </Typography>
+                    <Box>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {
+                                loading?(
+                                    <React.Fragment>
+                                      <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+                                      <Skeleton animation="wave" height={10} width="80%" />
+                                    </React.Fragment>
+                                  ) : body
+                            }
+        
+                        </Typography>
+                    </Box>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
-                    Share
-                    </Button>
-                    <Button size="small" color="primary" onClick={handleReadMore}>
-                    Learn More
-                    </Button>
+                    <Box display="flex" justifyContent="space-between" width="100%">
+                        <Button size="small" color="primary">
+                            <a href="mailto:mdnimurhasann@gamil.com">Share</a>
+                        </Button>
+                        <Button size="small" color="primary" onClick={handleReadMore}>
+                            VIEW DETAIL
+                        </Button>
+                    </Box>
                 </CardActions>
                 </Card>
- 
         </Box>
     );
 };

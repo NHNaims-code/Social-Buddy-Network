@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from '../Post/Post'
-import { Box } from '@material-ui/core';
-import { ImgUrlContext } from '../../App';
+import { Box, Toolbar } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const Home = () => {
-
+const Home = (props) => {
 
 
     const [posts, setPosts] = useState([]);
@@ -15,13 +20,65 @@ const Home = () => {
         .then(data => setPosts(data))
     }
     useEffect(serverData , [])
-    return (
-        <Box bgcolor="#F0F2F5" color="secondary.contrastText" p={2}>
 
-            gfgdgg
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          position: 'fixed',
+          bottom: theme.spacing(2),
+          right: theme.spacing(2),
+        },
+      }));
+
+    function ScrollTop(props) {
+        const { children, window } = props;
+        const classes = useStyles();
+        const trigger = useScrollTrigger({
+          target: window ? window() : undefined,
+          disableHysteresis: true,
+          threshold: 100,
+        });
+      
+        const handleClick = (event) => {
+          const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+    
+          if (anchor) {
+            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        };
+      
+        return (
+          <Zoom in={trigger}>
+            <div onClick={handleClick} role="presentation" className={classes.root}>
+              {children}
+            </div>
+          </Zoom>
+        );
+      }
+      
+      ScrollTop.propTypes = {
+        children: PropTypes.element.isRequired,
+        window: PropTypes.func,
+      };
+
+    return (
+        <Box width="100%" bgcolor="#F0F2F5">
+
+            
+            <Box bgcolor="#F0F2F5" color="secondary.contrastText" >
             {
                 posts.map(post => <Post post={post} key={post.id}></Post>)
             }
+            <Box width="100%" display = 'flex' justifyContent="center" pt={3} mt={3}>
+                <CircularProgress />
+            </Box>
+            </Box>
+
+        <Toolbar id="back-to-top-anchor" bgcolor="blue" />
+        <ScrollTop {...props}>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
         </Box>
     );
 };
