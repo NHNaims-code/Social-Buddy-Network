@@ -1,3 +1,15 @@
+It is a web application like Facebook and Instagram posts.
+• It's working with dynamic posts and images.
+• Anyone can comment here and see also other's comment
+• You can come to the first post easily by using the upper arrow icon at the bottom.
+
+This Application made with the best web technology
+• React Js
+• Node Js
+• Material-UI
+• Bootstrap
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
