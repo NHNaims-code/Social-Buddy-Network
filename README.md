@@ -1,13 +1,13 @@
-It is a web application like Facebook and Instagram posts.
-• It's working with dynamic posts and images.
-• Anyone can comment here and see also other's comment
-• You can come to the first post easily by using the upper arrow icon at the bottom.
+## It is a web application like Facebook and Instagram posts. <br />
+• It's working with dynamic posts and images. <br />
+• Anyone can comment here and see also other's comment <br />
+• You can come to the first post easily by using the upper arrow icon at the bottom. <br />
 
-This Application made with the best web technology
-• React Js
-• Node Js
-• Material-UI
-• Bootstrap
+## This Application made with the best web technology<br />
+• React Js<br />
+• Node Js<br />
+• Material-UI<br />
+• Bootstrap<br />
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
