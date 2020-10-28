@@ -3,7 +3,7 @@
 • Anyone can comment here and see also other's comment <br />
 • You can come to the first post easily by using the upper arrow icon at the bottom. <br />
 
-## This Application made with the best web technology<br />
+## This Application made with the latest web technology<br />
 • React Js<br />
 • Node Js<br />
 • Material-UI<br />
