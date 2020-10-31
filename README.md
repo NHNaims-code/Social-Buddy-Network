@@ -1,4 +1,5 @@
 ## It is a web application like Facebook and Instagram posts. <br />
+• In this application, users will see 100+ dynamic posts.
 • It's working with dynamic posts and images. <br />
 • Anyone can comment here and see also other's comment <br />
 • You can come to the first post easily by using the upper arrow icon at the bottom. <br />
