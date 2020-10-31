@@ -4,9 +4,7 @@
 👉 Anyone can comment here and see also other's comment <br />
 👉 You can come to the first post easily by using the upper arrow icon at the bottom. <br />
 
-🔗
-![screenshot](https://i.ibb.co/qjQ91Wd/Screenshot-2020-10-31-20-44-35-05.png)
-<img src="https://i.ibb.co/qjQ91Wd/Screenshot-2020-10-31-20-44-35-05.png" width="200" />
+<img src="https://i.ibb.co/qjQ91Wd/Screenshot-2020-10-31-20-44-35-05.png" width="300" />
 
 ## This Application made with the latest web technology<br />
 ⚙️ React Js<br />
@@ -14,10 +12,10 @@
 ⚙️ Material-UI<br />
 ⚙️ Bootstrap<br />
 ##
-This application's Live link: https://social-post.netlify.app<br/>
+🔗This application's Live link: https://social-post.netlify.app<br/>
 ## [Open Live Website](https://social-post.netlify.app)<br/>
 <br/>
-LinkedIn Profile: https://www.linkedin.com/in/md-nimur-hasan<br/>
+🔗LinkedIn Profile: https://www.linkedin.com/in/md-nimur-hasan<br/>
 ## [Visite LinkedIn Profile](https://www.linkedin.com/in/md-nimur-hasan/)<br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
