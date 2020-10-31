@@ -4,8 +4,9 @@
 👉 Anyone can comment here and see also other's comment <br />
 👉 You can come to the first post easily by using the upper arrow icon at the bottom. <br />
 
-
+🔗
 ![screenshot](https://i.ibb.co/qjQ91Wd/Screenshot-2020-10-31-20-44-35-05.png)
+<img src="https://i.ibb.co/qjQ91Wd/Screenshot-2020-10-31-20-44-35-05.png" width="200" />
 
 ## This Application made with the latest web technology<br />
 ⚙️ React Js<br />
