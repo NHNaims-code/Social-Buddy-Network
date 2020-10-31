@@ -13,10 +13,10 @@
 ⚙️ Bootstrap<br />
 ##
 🔗This application's Live link: https://social-post.netlify.app<br/>
-## [Open Live Website](https://social-post.netlify.app)<br/>
-<br/>
 🔗LinkedIn Profile: https://www.linkedin.com/in/md-nimur-hasan<br/>
-## [Visite LinkedIn Profile](https://www.linkedin.com/in/md-nimur-hasan/)<br/>
+🔗Portfolio: https://nimur.netlify.app<br/>
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
